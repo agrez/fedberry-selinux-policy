@@ -1,0 +1,11 @@
+
+module systemd_pstore 1.0;
+
+require {
+	type pstore_t;
+	type init_t;
+	class dir create;
+}
+
+#============= init_t ==============
+allow init_t pstore_t:dir create;

@@ -1,0 +1,11 @@
+
+module systemd_syslogd 1.0;
+
+require {
+	type syslogd_t;
+	type init_t;
+	class netlink_audit_socket { bind create setopt };
+}
+
+#============= init_t ==============
+allow init_t syslogd_t:netlink_audit_socket { bind create setopt };
