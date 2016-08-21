@@ -1,13 +1,14 @@
 %global selinux_pol targeted
-%global modulenames systemd_devlog systemd_pstore systemd_syslogd
+%global modulenames systemd_devlog systemd_pstore systemd_syslogd systemd_rfkill
 
 Name:           fedberry-selinux-policy
 Version:        0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv3+
 Source0:        systemd_pstore.te
 Source1:        systemd_devlog.te
 Source2:        systemd_syslogd.te
+Source3:        systemd_rfkill.te
 Group:          Development/Tools
 Summary:        Custom SELinux policy module(s) for FedBerry
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -19,10 +20,8 @@ Requires:       selinux-policy-targeted
 Custom SELinux policy module(s) for FedBerry.
 
 %prep
-if [ ! -d %{name} ]; then
-  mkdir %{name}
-fi
-cp -p %{SOURCE0} %{SOURCE1} %{SOURCE2} %{name}
+mkdir %{name}
+cp -p %{SOURCE0} %{SOURCE1} %{SOURCE2} %{SOURCE3} %{name}
 
 %build
 cd %{name}
@@ -48,5 +47,8 @@ rm -rf %{buildroot}
 %{_datadir}/selinux/%{selinux_pol}/*.pp
 
 %changelog
+* Sun Aug 21 2016 Vaughan Agrez <devel at agrez.net> 0.1-2
+- Add policy module for systemd_rfkill
+
 * Wed Aug 17 2016 Vaughan Agrez <devel at agrez.net> 0.1-1
 - Initial package
