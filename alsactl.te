@@ -1,0 +1,13 @@
+
+module alsactl 1.0;
+
+require {
+	type lvm_lock_t;
+	type alsa_t;
+	class file { create getattr lock open read write };
+    class dir { add_name write };
+}
+
+#============= alsa_t ==============
+allow alsa_t lvm_lock_t:file { create getattr lock open read write };
+allow alsa_t lvm_lock_t:dir { add_name write };

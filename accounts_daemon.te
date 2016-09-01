@@ -1,0 +1,11 @@
+
+module accounts_daemon 1.0;
+
+require {
+	type admin_home_t;
+	type accountsd_t;
+	class dir { add_name create write };
+}
+
+#============= accountsd_t ==============
+allow accountsd_t admin_home_t:dir { add_name create write };
