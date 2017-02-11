@@ -1,14 +1,12 @@
 
-module systemd_modules 1.0;
+policy_module(systemd-modules_unix_dgram_socket, 1.0)
 
 require {
 	type syslogd_t;
 	type systemd_modules_load_t;
-	type kmsg_device_t;
 	class unix_dgram_socket sendto;
-	class chr_file write;
 }
 
 #============= systemd_modules_load_t ==============
-allow systemd_modules_load_t kmsg_device_t:chr_file write;
 allow systemd_modules_load_t syslogd_t:unix_dgram_socket sendto;
+dev_write_kmsg(systemd_modules_load_t)

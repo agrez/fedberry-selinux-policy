@@ -1,26 +1,24 @@
 %global selinux_pol targeted
-%global modulenames accounts_daemon alsactl systemd_devlog systemd_pstore systemd_syslogd systemd_rfkill systemd_modules
 
 Name:           fedberry-selinux-policy
-Version:        24
+Version:        25
 Release:        1%{?dist}
 Summary:        Custom SELinux policy module(s) for FedBerry
 Group:          Development/Tools
 License:        GPLv3+
 URL:            https://github.com/fedberry/fedberry-selinux-policy
 Source0:        systemd_pstore.te
-Source1:        systemd_devlog.te
-Source2:        systemd_syslogd.te
-Source3:        systemd_rfkill.te
-Source4:        accounts_daemon.te
-Source5:        alsactl.te
-Source6:        systemd_modules.te
+Source1:        systemd_syslogd.te
+Source2:        systemd-modules_devtmpfs.te
+Source3:        systemd-modules_unix_dgram_socket.te
 
 BuildArch:      noarch
 BuildRequires:  checkpolicy
 BuildRequires:  selinux-policy
 BuildRequires:  selinux-policy-devel
 Requires:       selinux-policy-targeted
+
+%define policy_mods	%(echo %{sources} |sed -e 's|/builddir/build/SOURCES/||g' -e 's|\\.te||g')
 
 
 %description
@@ -29,9 +27,7 @@ Requires:       selinux-policy-targeted
 
 %prep
 mkdir %{name}
-for module in %{modulenames}; do
-    cp -p %{_sourcedir}/$module.te %{name}
-done
+cp -a %{sources} %{name}
 
 
 %build
@@ -50,7 +46,7 @@ install -p -m 644 %{name}/*.pp %{buildroot}%{_datadir}/selinux/%{selinux_pol}/
 
 %postun
 if [ $1 -eq 0 ] ; then
-  /usr/sbin/semodule -r %{modulenames} &> /dev/null || :
+    /usr/sbin/semodule -r %{policy_mods} &> /dev/null || :
 fi
 
 
@@ -64,6 +60,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Feb 09 2017 Vaughan Agrez <devel at agrez.net> 25-1
+- Update / add policy modules for f25 release images
+- Improve %%prep & %%postun
+
 * Thu Sep 22 2016 Vaughan Agrez <devel at agrez.net> 24-1
 - Add policy module for systemd_modules
 - Clean up spec

@@ -1,0 +1,9 @@
+
+policy_module(systemd-modules_devtmpfs, 1.0)
+
+require {
+	type systemd_modules_load_t;
+}
+
+#============= systemd_modules_load_t ==============
+dev_write_kmsg(systemd_modules_load_t)

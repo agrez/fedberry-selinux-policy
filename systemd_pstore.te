@@ -1,5 +1,5 @@
 
-module systemd_pstore 1.0;
+policy_module(systemd_pstore, 1.0)
 
 require {
 	type pstore_t;
