@@ -2,7 +2,7 @@
 
 Name:           fedberry-selinux-policy
 Version:        25
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Custom SELinux policy module(s) for FedBerry
 Group:          Development/Tools
 License:        GPLv3+
@@ -11,12 +11,16 @@ Source0:        systemd_pstore.te
 Source1:        systemd_syslogd.te
 Source2:        systemd-modules_devtmpfs.te
 Source3:        systemd-modules_unix_dgram_socket.te
+Source4:        systemd-modules_modules_load.te
+Source5:        systemd_module_load.te
+Source6:        modprobe_module_load.te
+
 
 BuildArch:      noarch
 BuildRequires:  checkpolicy
 BuildRequires:  selinux-policy
 BuildRequires:  selinux-policy-devel
-Requires:       selinux-policy-targeted
+Requires:       selinux-policy-targeted >= 3.13.1-225.10.fc25
 
 %define policy_mods	%(echo %{sources} |sed -e 's|/builddir/build/SOURCES/||g' -e 's|\\.te||g')
 
@@ -60,6 +64,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Feb 26 2017 Vaughan Agrez <devel at agrez.net> 25-2
+- Add policy modules: systemd-modules_modules_load, modprobe_module_load,
+  systemd_module_load
+  (Fixes breakage from selinux-policy-targeted-3.13.1-225.10.fc25)
+
 * Thu Feb 09 2017 Vaughan Agrez <devel at agrez.net> 25-1
 - Update / add policy modules for f25 release images
 - Improve %%prep & %%postun
