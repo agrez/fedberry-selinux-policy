@@ -1,0 +1,11 @@
+
+module systemd_module_load 1.0;
+
+require {
+	type init_t;
+	type modules_object_t;
+	class system module_load;
+}
+
+#============= init_t ==============
+allow init_t modules_object_t:system module_load;
