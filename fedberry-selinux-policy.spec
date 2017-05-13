@@ -2,7 +2,7 @@
 
 Name:           fedberry-selinux-policy
 Version:        25
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Custom SELinux policy module(s) for FedBerry
 Group:          Development/Tools
 License:        GPLv3+
@@ -11,6 +11,7 @@ Source0:        systemd_pstore.te
 Source1:        systemd_syslogd.te
 Source2:        systemd-modules_devtmpfs.te
 Source3:        systemd-modules_unix_dgram_socket.te
+Source4:        systemd_rfkill.te
 
 BuildArch:      noarch
 BuildRequires:  checkpolicy
@@ -60,6 +61,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat May 13 2017 Vaughan Agrez <devel at agrez.net> 25-4
+- Add systemd_rfkill policy module
+
 * Thu Mar 02 2017 Vaughan Agrez <devel at agrez.net> 25-3
 - Drop policy modules: systemd-modules_modules_load, modprobe_module_load,
   systemd_module_load (Fixed in selinux-policy-targeted-3.13.1-225.11.fc25)
