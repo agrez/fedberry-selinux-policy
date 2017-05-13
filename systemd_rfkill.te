@@ -1,0 +1,11 @@
+
+module systemd_rfkill 1.0;
+
+require {
+	type syslogd_t;
+	type systemd_rfkill_t;
+	class unix_dgram_socket sendto;
+}
+
+#============= systemd_rfkill_t ==============
+allow systemd_rfkill_t syslogd_t:unix_dgram_socket sendto;
