@@ -1,8 +1,8 @@
 %global selinux_pol targeted
 
 Name:           fedberry-selinux-policy
-Version:        25
-Release:        4%{?dist}
+Version:        26
+Release:        1%{?dist}
 Summary:        Custom SELinux policy module(s) for FedBerry
 Group:          Development/Tools
 License:        GPLv3+
@@ -61,6 +61,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Aug 08 2017 Vaughan Agrez <devel at agrez.net> 26-1
+- Bump version for Fedberry 26
+- Drop systemd-modules_devtmpfs policy module
+- Add sssd_passwd policy module
+
 * Sat May 13 2017 Vaughan Agrez <devel at agrez.net> 25-4
 - Add systemd_rfkill policy module
 
