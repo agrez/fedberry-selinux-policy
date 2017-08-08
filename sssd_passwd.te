@@ -1,0 +1,14 @@
+
+module sssd_passwd 1.0;
+
+require {
+        type sssd_public_t;
+        type sssd_var_lib_t;
+        type loadkeys_t;
+        class file { open read getattr };
+        class sock_file write;
+}
+
+#============= loadkeys_t ==============
+allow loadkeys_t sssd_public_t:file { open read getattr };
+allow loadkeys_t sssd_var_lib_t:sock_file write;
