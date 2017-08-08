@@ -9,7 +9,6 @@ License:        GPLv3+
 URL:            https://github.com/fedberry/fedberry-selinux-policy
 Source0:        systemd_pstore.te
 Source1:        systemd_syslogd.te
-Source2:        systemd-modules_devtmpfs.te
 Source3:        systemd-modules_unix_dgram_socket.te
 Source4:        systemd_rfkill.te
 
