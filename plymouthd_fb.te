@@ -1,0 +1,11 @@
+
+module plymouthd_fb 1.0;
+
+require {
+	type plymouthd_t;
+	type framebuf_device_t;
+	class chr_file map;
+}
+
+#============= plymouthd_t ==============
+allow plymouthd_t framebuf_device_t:chr_file map;
