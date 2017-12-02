@@ -1,7 +1,7 @@
 %global selinux_pol targeted
 
 Name:           fedberry-selinux-policy
-Version:        26
+Version:        27
 Release:        1%{?dist}
 Summary:        Custom SELinux policy module(s) for FedBerry
 Group:          Development/Tools
@@ -62,6 +62,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Nov 30 2017 Vaughan Agrez <devel at agrez.net> 27-1
+- Bump version for Fedberry 27
+- Add plymouthd frambuffer policy module
+
 * Tue Aug 08 2017 Vaughan Agrez <devel at agrez.net> 26-1
 - Bump version for Fedberry 26
 - Drop systemd-modules_devtmpfs policy module
