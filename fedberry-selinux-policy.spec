@@ -13,6 +13,7 @@ Source2:        sssd_passwd.te
 Source3:        systemd-modules_unix_dgram_socket.te
 Source4:        systemd_rfkill.te
 Source5:        plymouthd_fb.te
+Source6:        systemd_tmpfile.te
 
 BuildArch:      noarch
 BuildRequires:  checkpolicy

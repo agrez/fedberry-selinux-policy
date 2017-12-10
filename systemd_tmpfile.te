@@ -1,0 +1,11 @@
+
+module systemd_tmpfile 1.0;
+
+require {
+	type usermodehelper_t;
+	type systemd_tmpfiles_t;
+	class file getattr;
+}
+
+#============= systemd_tmpfiles_t ==============
+allow systemd_tmpfiles_t usermodehelper_t:file getattr;
