@@ -2,7 +2,7 @@
 
 Name:           fedberry-selinux-policy
 Version:        27
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Custom SELinux policy module(s) for FedBerry
 Group:          Development/Tools
 License:        GPLv3+
@@ -63,6 +63,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Dec 10 2017 Vaughan Agrez <devel at agrez.net> 27-2
+- Add systemd_tmpfile policy module
+
 * Thu Nov 30 2017 Vaughan Agrez <devel at agrez.net> 27-1
 - Bump version for Fedberry 27
 - Add plymouthd frambuffer policy module
