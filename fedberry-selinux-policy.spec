@@ -1,25 +1,25 @@
 %global selinux_pol targeted
 
 Name:           fedberry-selinux-policy
-Version:        27
-Release:        2%{?dist}
+Version:        28
+Release:        1%{?dist}
 Summary:        Custom SELinux policy module(s) for FedBerry
 Group:          Development/Tools
 License:        GPLv3+
-URL:            https://github.com/fedberry/fedberry-selinux-policy
-Source0:        systemd_pstore.te
-Source1:        systemd_syslogd.te
-Source2:        sssd_passwd.te
-Source3:        systemd-modules_unix_dgram_socket.te
-Source4:        systemd_rfkill.te
-Source5:        plymouthd_fb.te
-Source6:        systemd_tmpfile.te
+URL:            https://github.com/fedberry/%{name}
+Source0:        https://raw.githubusercontent.com/fedberry/%{name}/master/systemd_pstore.te
+Source1:        https://raw.githubusercontent.com/fedberry/%{name}/master/systemd_syslogd.te
+Source2:        https://raw.githubusercontent.com/fedberry/%{name}/master/sssd_passwd.te
+Source3:        https://raw.githubusercontent.com/fedberry/%{name}/master/systemd-modules_unix_dgram_socket.te
+Source4:        https://raw.githubusercontent.com/fedberry/%{name}/master/systemd_rfkill.te
+Source5:        https://raw.githubusercontent.com/fedberry/%{name}/master/plymouthd_fb.te
+Source6:        https://raw.githubusercontent.com/fedberry/%{name}/master/systemd_tmpfile.te
 
 BuildArch:      noarch
 BuildRequires:  checkpolicy
 BuildRequires:  selinux-policy
 BuildRequires:  selinux-policy-devel
-Requires:       selinux-policy-targeted >= 3.13.1-225.10.fc25
+Requires:       selinux-policy-targeted
 
 %define policy_mods	%(echo %{sources} |sed -e 's|/builddir/build/SOURCES/||g' -e 's|\\.te||g')
 
@@ -35,7 +35,7 @@ cp -a %{sources} %{name}
 
 %build
 cd %{name}
-make -f /usr/share/selinux/devel/Makefile
+make -f %{_datadir}/selinux/devel/Makefile
 
 
 %install
@@ -53,16 +53,16 @@ if [ $1 -eq 0 ] ; then
 fi
 
 
-%clean
-rm -rf %{buildroot}
-
-
 %files
 %defattr(-,root,root)
 %{_datadir}/selinux/%{selinux_pol}/*.pp
 
 
 %changelog
+* Tue Jun 26 2018 Vaughan Agrez <devel at agrez.net> 28-1
+- Misc spec updates
+- Bump version for Fedberry 28
+
 * Sun Dec 10 2017 Vaughan Agrez <devel at agrez.net> 27-2
 - Add systemd_tmpfile policy module
 
