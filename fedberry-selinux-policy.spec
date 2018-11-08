@@ -1,19 +1,19 @@
 %global selinux_pol targeted
 
 Name:           fedberry-selinux-policy
-Version:        28
+Version:        29
 Release:        1%{?dist}
 Summary:        Custom SELinux policy module(s) for FedBerry
 Group:          Development/Tools
 License:        GPLv3+
 URL:            https://github.com/fedberry/%{name}
-Source0:        https://raw.githubusercontent.com/fedberry/%{name}/master/systemd_pstore.te
-Source1:        https://raw.githubusercontent.com/fedberry/%{name}/master/systemd_syslogd.te
-Source2:        https://raw.githubusercontent.com/fedberry/%{name}/master/sssd_passwd.te
-Source3:        https://raw.githubusercontent.com/fedberry/%{name}/master/systemd-modules_unix_dgram_socket.te
-Source4:        https://raw.githubusercontent.com/fedberry/%{name}/master/systemd_rfkill.te
-Source5:        https://raw.githubusercontent.com/fedberry/%{name}/master/plymouthd_fb.te
-Source6:        https://raw.githubusercontent.com/fedberry/%{name}/master/systemd_tmpfile.te
+Source0:        %{url}/raw/master/systemd_pstore.te
+Source1:        %{url}/raw/master/systemd_syslogd.te
+Source2:        %{url}/raw/master/sssd_passwd.te
+Source3:        %{url}/raw/master/systemd-modules_unix_dgram_socket.te
+Source4:        %{url}/raw/master/systemd_rfkill.te
+Source5:        %{url}/raw/master/plymouthd_fb.te
+Source6:        %{url}/raw/master/systemd_tmpfile.te
 
 BuildArch:      noarch
 BuildRequires:  checkpolicy
@@ -59,6 +59,10 @@ fi
 
 
 %changelog
+* Fri Oct 12 2018 Vaughan Agrez <devel at agrez.net> 29-1
+- Bump version for Fedberry 29
+- Update spec
+
 * Tue Jun 26 2018 Vaughan Agrez <devel at agrez.net> 28-1
 - Misc spec updates
 - Bump version for Fedberry 28
